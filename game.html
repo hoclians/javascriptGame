@@ -3,7 +3,7 @@
 	<!--Nicholas Burd
 		10/2/14
 		Introduction to Programming
-		Project 2 - Game V0.2 -->
+		Project 2 - Game V0.3 -->
 	<head>
 		<title>
 			TomeGadget
@@ -143,20 +143,26 @@
 					return;
 				}
 			}
+			//uses text input to trigger movement functions
 			function goButton(){
 				var input=document.getElementById("inputTxtBox").value;
+				//checks for North movement
 				if(input=="n"||input=="N"){
 					goNorth();
 				}
+				//checks for South movement
 				else if(input=="s"||input=="S"){
 					goSouth();
 				}
+				//checks for East movement
 				else if(input=="e"||input=="E"){
 					goEast();
 				}
+				//checks for West movement
 				else if(input=="w"||input=="W"){
 					goWest();
 				}else{
+					//Error Message for invalid input
 					updateDisplay("Invalid Command. Valid Commands are: n,s,e,w,N,S,E,W");
 				}
 			}
