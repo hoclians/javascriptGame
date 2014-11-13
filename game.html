@@ -8,193 +8,35 @@
 		<title>
 			TomeGadget
 		</title>
-		<script type="text/javascript">
-			var local=0;//keeps track of location
-			var score=0;//keeps track of total score
-			//checks if player has been to each location
-			var check0=false;
-			var check1=false;
-			var check2=false;
-			var check3=false;
-			var check4=false;
-			var check5=false;
-			//button movement for northern movement
-			function goNorth(){
-				var message;
-				//checks if movement to room 1 is possible
-				if(local==0){
-					local=1;
-					//checks if player has been to this room before
-					if(check1==false){
-						check1=true;
-						score+=5;
-					}
-					//sets and displays the message for this room
-					message="The whispers are becoming clearer now. There appears to be two voices. One from the East speaking of magics unknown, and one from the West whispering of blasphemous science.";
-					updateDisplay(message);
-					return;
-				} 
-				if(local==2){
-					local=4;
-					if(check4=false){
-						check4=true;
-						score+=5;
-					}
-					//sets and displays the message for this room
-					message="You find yourself faced with a broken machine of unknown purpose. There is a clearly broken piece jutting out of the machine, and a locked door to the east. Being the handsome smart person you are you realize that to proceed you must fix the machine.";
-					updateDisplay(message);
-					return;
-				}
-				if(local==3){
-					local=5;
-					if(check5=false){
-						check5=true;
-						score+=5;
-					}
-					//sets and displays the message for this room
-					message="You find yourself in a dusty old room containing nothing but a massive locked vault to the west. There doesnt appear to be any way to unlock the door. You laugh to yourself thinking \"It appears as if the door must be locked with some sort of spell\"";
-					updateDisplay(message);
-					return;
-				}else{
-					//sets and displays error message for wrong movement
-					message="You can't go that way.";
-					updateDisplay(message);
-					return;
-				}
-			}
-			//button movement for southern movement
-			function goSouth(){
-				var message;
-				//checks if movement to room 0 is possible
-				if(local==1){
-					local=0;
-					//checks if player has been to this room before
-					if(check0==false){
-						check0=true;
-						score+=5;
-					}
-					//sets and displays the message for this room
-					message="You seem to be back where you started. Best be careful not to get lost in this labyrinth of a place.";
-					updateDisplay(message);
-					return;
-				} else{
-					//sets and displays error message for wrong movement
-					message="You can't go that way.";
-					updateDisplay(message);
-					return;
-				}
-			}
-			//button function for eastern movement
-			function goEast(){
-				var message;
-				//checks if movement to room 3 is possible
-				if(local==1){
-					local=3;
-					//checks if player has been to this room before
-					if(check3==false){
-						check3=true;
-						score+=5;
-					}
-					//sets and displays the message for this room
-					message="You have arrived in what appears to be a library of old tomes. One tome catches your eye. It appears so mesmerizing one could just touch it...";
-					updateDisplay(message);
-					return;
-				} 
-				//checks if movement to room 1 is possible
-				if(local==2){
-					local=1;
-					//sets and displays the message for this room
-					message="You seem to be back in the main hall. Best be careful not to get lost in this labyrinth of a place.";
-					updateDisplay(message);
-					return;
-				}else{
-					//sets and displays error message for wrong movement
-					message="You can't go that way.";
-					updateDisplay(message);
-					return;
-				}
-			}
-			//button function for western movement
-			function goWest(){
-				var message;
-				//checks if movement to room 1 is possible
-				if(local==3){
-					local=1;
-					message="You seem to be back in the main hall. Best be careful not to get lost in this labyrinth of a place.";
-					updateDisplay(message);
-					return;
-				} 
-				//checks if movement to room 2 is possible
-				if(local==1){
-					local=2;
-					//checks if player has been to this room before
-					if(check2==false){
-						check2=true;
-						score+=5;
-					}
-					//sets and displays the message for this room
-					message="You arrive in the western room where you find the source of the noise. A mysterious machine sits in the center of the room. its gears turning slowly. what could it do?";
-					updateDisplay(message);
-					return;
-				}else{
-					//sets and displays error message for wrong movement
-					message="You can't go that way.";
-					updateDisplay(message);
-					return;
-				}
-			}
-			//uses text input to trigger movement functions
-			function goButton(){
-				var input=document.getElementById("inputTxtBox").value;
-				//checks for North movement
-				if(input=="n"||input=="N"){
-					goNorth();
-				}
-				//checks for South movement
-				else if(input=="s"||input=="S"){
-					goSouth();
-				}
-				//checks for East movement
-				else if(input=="e"||input=="E"){
-					goEast();
-				}
-				//checks for West movement
-				else if(input=="w"||input=="W"){
-					goWest();
-				}else{
-					//Error Message for invalid input
-					updateDisplay("Invalid Command. Valid Commands are: n,s,e,w,N,S,E,W");
-				}
-			}
-			//this function displays story messages and the score
-			function updateDisplay(msg){
-				//displays story
-				var target=document.getElementById("OutputTxtBox");
-				target.value=msg+"\n"+target.value;
-				//displays score
-				document.getElementById("OutputScore").value=score;
-			}
-		</script>
+		<script type="text/javascript" src="locations.js"></script>
+		
 	</head>
-	<body>
+	<body onload="init()">
 		<input type="button"
+				id="North"
 				value="North"
 				onclick="goNorth();" />
 		<input type="button"
+				id="South"
 				value="South"
 				onclick="goSouth();" />
 		<input type="button"
+				id="East"
 				value="East"
 				onclick="goEast();" />
 		<input type="button"
+				id="West"
 				value="West"
 				onclick="goWest();" />
+		<input type="button"
+				value="Inventory"
+				onclick="dispInventory();" />
 		
 		<a href="mailto:njburd@verizon.net?Subject=Email%20For%20Help" target="_top">
 				Help Email
 		</a>
 		<br>
-		<textarea id="OutputTxtBox" rows="6" cols="32">You wake up to find yourself in a dimly lit room with only a wrench and a moldy old book in your bag. You hear something in the next room.</textarea>
+		<textarea id="OutputTxtBox" rows="6" cols="32"></textarea>
 		Score:
 		<textarea id="OutputScore" rows="1" cols="5"></textarea>
 		<br>
@@ -204,5 +46,6 @@
 		<input type="button"
 				value="Go"
 				onclick="goButton();" />
+		<img src="map.jpg"></img>
 	</body>
 </html>
